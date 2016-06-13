@@ -71,6 +71,7 @@ func main() {
 	}()
 
 	initButton(gbot)
+	initMoveDetect(gbot)
 
 	go gbot.Start()
 
