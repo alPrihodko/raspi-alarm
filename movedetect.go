@@ -10,8 +10,7 @@ import (
 	"github.com/hybridgroup/gobot/platforms/raspi"
 )
 
-func initMoveDetect(gbot *gobot.Gobot) {
-	r := raspi.NewRaspiAdaptor("raspi")
+func initMoveDetect(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 	button := gpio.NewButtonDriver(r, "button", movementSensor)
 
 	work := func() {

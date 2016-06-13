@@ -10,6 +10,7 @@ import (
 	"syscall"
 
 	"github.com/hybridgroup/gobot"
+	"github.com/hybridgroup/gobot/platforms/raspi"
 	"golang.org/x/net/websocket"
 )
 
@@ -46,6 +47,7 @@ func main() {
 	}
 
 	gbot := gobot.NewGobot()
+	ra := raspi.NewRaspiAdaptor("raspi")
 
 	conns = socketConns{make(map[int32]*websocket.Conn), &sync.Mutex{}}
 
@@ -70,8 +72,8 @@ func main() {
 		os.Exit(1)
 	}()
 
-	initButton(gbot)
-	initMoveDetect(gbot)
+	initMoveDetect(gbot, ra)
+	initButton(gbot, ra)
 
 	go gbot.Start()
 
