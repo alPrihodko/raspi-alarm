@@ -26,9 +26,9 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 
 		gobot.On(button.Event("release"), func(data interface{}) {
 			log.Println("button released")
-			if !isChanClosed(quit) {
-				close(quit)
-			}
+			//if !isChanClosed(quit) {
+			close(quit)
+			//}
 
 			if time.Since(timer) > 5*time.Second {
 				Led.On()
