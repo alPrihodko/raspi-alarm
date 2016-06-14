@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 	//"os"
 	//"time"
 	//  "sync"
@@ -12,14 +13,21 @@ import (
 
 func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 	button := gpio.NewButtonDriver(r, "button", activateButton)
-
 	work := func() {
+		var timer time.Time
+		quit := make(chan struct{})
+
 		gobot.On(button.Event("push"), func(data interface{}) {
 			log.Println("button pressed")
+			timer = time.Now()
+			go blink(quit)
 		})
 
 		gobot.On(button.Event("release"), func(data interface{}) {
 			log.Println("button released")
+			if time.Since(timer) > 5*time.Second {
+				Led.On()
+			}
 		})
 
 	}

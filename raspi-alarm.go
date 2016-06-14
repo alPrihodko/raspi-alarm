@@ -10,6 +10,7 @@ import (
 	"syscall"
 
 	"github.com/hybridgroup/gobot"
+	"github.com/hybridgroup/gobot/platforms/gpio"
 	"github.com/hybridgroup/gobot/platforms/raspi"
 	"golang.org/x/net/websocket"
 )
@@ -28,6 +29,11 @@ var INTERVAL int
 //var err error
 
 var conf Config
+
+/*
+Led is alarm led indicator
+*/
+var Led *gpio.LedDriver
 
 type socketConns struct {
 	ws   map[int32]*websocket.Conn
@@ -74,6 +80,7 @@ func main() {
 
 	initMoveDetect(gbot, ra)
 	initButton(gbot, ra)
+	Led = initLed(gbot, ra)
 
 	go gbot.Start()
 
