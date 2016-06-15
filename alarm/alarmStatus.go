@@ -77,10 +77,19 @@ func (q alarm) Disarm() error {
 func exeCmd(cmd string, wg *sync.WaitGroup) {
 	log.Println(cmd)
 	parts := strings.Fields(cmd)
-	out, err := exec.Command(parts[0], parts[1]).Output()
+	var out []byte
+	var err error
+	if len(parts) > 2 {
+		out, err = exec.Command(parts[0], parts[1], parts[2]).Output()
+	} else if len(parts) == 2 {
+		out, err = exec.Command(parts[0], parts[1]).Output()
+	} else {
+		log.Println("Invalid arguments")
+	}
 	if err != nil {
 		log.Println("error occured")
 		log.Println(err.Error())
+		log.Println(out)
 	}
 	log.Println(out)
 	wg.Done()
