@@ -5,6 +5,7 @@ import (
 	//"os"
 	//"time"
 	//  "sync"
+	"raspi-alarm/alarm"
 	"time"
 
 	"github.com/hybridgroup/gobot"
@@ -38,5 +39,13 @@ func blink(quit chan struct{}) {
 			ticker.Stop()
 			return
 		}
+	}
+}
+
+func setLed() {
+	if alarm.Alarm.Armed == true {
+		Led.On()
+	} else {
+		Led.Off()
 	}
 }

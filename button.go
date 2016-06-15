@@ -26,6 +26,7 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 		})
 
 		gobot.On(button.Event("release"), func(data interface{}) {
+			defer setLed()
 			log.Println("button released")
 			//if !isChanClosed(quit) {
 			close(quit)
@@ -43,15 +44,9 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 						log.Println("Cannot arm system")
 					}
 				}
-			} else {
-				if alarm.Alarm.Armed == true {
-					Led.On()
-				} else {
-					Led.Off()
-				}
 			}
-		})
 
+		})
 	}
 	robot := gobot.NewRobot("buttonBot",
 		[]gobot.Connection{r},
