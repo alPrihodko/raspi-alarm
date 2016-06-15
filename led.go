@@ -29,7 +29,7 @@ func initLed(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) *gpio.LedDriver {
 }
 
 func blink(quit chan struct{}) {
-	ticker := time.NewTicker(200 * time.Millisecond)
+	ticker := time.NewTicker(100 * time.Millisecond)
 	for {
 		select {
 		case <-ticker.C:

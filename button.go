@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"raspi-alarm/alarm"
 	"time"
 	//"os"
 	//"time"
@@ -30,10 +31,24 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 			close(quit)
 			//}
 
-			if time.Since(timer) > 5*time.Second {
-				Led.On()
+			if time.Since(timer) > 3*time.Second {
+				if alarm.Alarm.Armed == true {
+					err := alarm.Alarm.Disarm()
+					if err != nil {
+						log.Println("Cannot disarm system")
+					}
+				} else {
+					err := alarm.Alarm.Arm()
+					if err != nil {
+						log.Println("Cannot arm system")
+					}
+				}
 			} else {
-				Led.Off()
+				if alarm.Alarm.Armed == true {
+					Led.On()
+				} else {
+					Led.Off()
+				}
 			}
 		})
 
