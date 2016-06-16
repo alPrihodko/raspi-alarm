@@ -29,7 +29,6 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 			defer setLed()
 			log.Println("button released")
 			//if !isChanClosed(quit) {
-			close(quit)
 			//}
 
 			if time.Since(timer) > 1*time.Second {
@@ -45,7 +44,7 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 					}
 				}
 			}
-
+			close(quit)
 		})
 	}
 	robot := gobot.NewRobot("buttonBot",
