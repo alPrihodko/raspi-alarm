@@ -95,6 +95,8 @@ func main() {
 		}
 	}
 
+	setLed()
+
 	go gbot.Start()
 
 	err = http.ListenAndServe(":12345", nil)

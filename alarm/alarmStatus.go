@@ -90,8 +90,8 @@ func exeCmd(cmd string, wg *sync.WaitGroup) {
 	if err != nil {
 		log.Println("error occured")
 		log.Println(err.Error())
-		log.Println(out)
+		log.Println(string(out))
 	}
-	log.Println(out)
+	log.Println(string(out))
 	wg.Done()
 }
