@@ -51,7 +51,7 @@ func (q alarm) Arm() error {
 
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	exeCmd("/etc/init.d/uv4l_uvc start 046d:081b", wg)
+	exeCmd("/home/pi/w/go/src/raspi-alarm/arm.sh", wg)
 	wg.Wait()
 	Alarm.Armed = true
 	return nil
@@ -65,12 +65,11 @@ func (q alarm) Disarm() error {
 	if err != nil {
 		return err
 	}
+	Alarm.Armed = false
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	exeCmd("/etc/init.d/uv4l_uvc stop", wg)
+	exeCmd("/home/pi/w/go/src/raspi-alarm/disarm.sh", wg)
 	wg.Wait()
-
-	Alarm.Armed = false
 	return nil
 }
 
@@ -83,6 +82,8 @@ func exeCmd(cmd string, wg *sync.WaitGroup) {
 		out, err = exec.Command(parts[0], parts[1], parts[2]).Output()
 	} else if len(parts) == 2 {
 		out, err = exec.Command(parts[0], parts[1]).Output()
+	} else if len(parts) == 1 {
+		out, err = exec.Command(parts[0]).Output()
 	} else {
 		log.Println("Invalid arguments")
 	}
