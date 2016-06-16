@@ -32,7 +32,7 @@ func initButton(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 			close(quit)
 			//}
 
-			if time.Since(timer) > 3*time.Second {
+			if time.Since(timer) > 1*time.Second {
 				if alarm.Alarm.Armed == true {
 					err := alarm.Alarm.Disarm()
 					if err != nil {
