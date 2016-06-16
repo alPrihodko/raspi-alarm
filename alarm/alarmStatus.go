@@ -51,7 +51,7 @@ func (q alarm) Arm() error {
 
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	go exeCmd("/etc/init.d/uv4l_uvc start 046d:081b", wg)
+	exeCmd("/etc/init.d/uv4l_uvc start 046d:081b", wg)
 	wg.Wait()
 	Alarm.Armed = true
 	return nil
@@ -67,7 +67,7 @@ func (q alarm) Disarm() error {
 	}
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	go exeCmd("/etc/init.d/uv4l_uvc stop", wg)
+	exeCmd("/etc/init.d/uv4l_uvc stop", wg)
 	wg.Wait()
 
 	Alarm.Armed = false
