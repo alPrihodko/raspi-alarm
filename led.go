@@ -5,6 +5,7 @@ import (
 	//"os"
 	//"time"
 	//  "sync"
+	"log"
 	"raspi-alarm/alarm"
 	"time"
 
@@ -48,4 +49,5 @@ func setLed() {
 	} else {
 		Led.Off()
 	}
+	log.Println("status indicator: ", Led.State())
 }
