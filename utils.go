@@ -1,4 +1,4 @@
-package home
+package main
 
 import (
 	"gopkg.in/gomail.v2"
