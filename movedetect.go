@@ -18,7 +18,7 @@ func initMoveDetect(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 		gobot.On(button.Event("push"), func(data interface{}) {
 			log.Println("detected")
 			if alarm.Alarm.Armed {
-				ReportAlert("Move detected", "Sendor 1 detected move.", nil)
+				ReportAlert("Move detected", "Sendor 1 detected move.")
 			}
 		})
 

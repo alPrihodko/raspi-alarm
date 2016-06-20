@@ -7,13 +7,12 @@ import (
 	"os"
 )
 
-
 const (
 	emailFrom         = "alPrihodko@gmail.com"
 	emailTo           = "alPrihodko@gmail.com"
 	googleAccountName = "alPrihodko@gmail.com"
 	googleAPIKey      = "ahvpiuembqkvszpi"
-}
+)
 
 type config struct {
 	Active   string `json:"PumpState, string"`
