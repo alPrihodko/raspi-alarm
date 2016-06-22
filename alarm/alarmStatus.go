@@ -87,3 +87,23 @@ func ExeCmd(cmd string, wg *sync.WaitGroup) {
 	log.Println(string(out))
 	wg.Done()
 }
+
+/*
+Exists returns file exists
+*/
+func Exists(name string) (bool, error) {
+	_, err := os.Stat(name)
+
+	//log.Println(v)
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	if os.IsNotExist(err) {
+		log.Println("seems no file: ", name)
+		return false, nil
+	}
+
+	return err == nil, err
+}
