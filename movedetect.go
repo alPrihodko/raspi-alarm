@@ -15,6 +15,7 @@ func initMoveDetect(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 	button := gpio.NewButtonDriver(r, "button", movementSensor)
 
 	work := func() {
+
 		gobot.On(button.Event("push"), func(data interface{}) {
 			log.Println("detected")
 			if alarm.Alarm.Armed {
