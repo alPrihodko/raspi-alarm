@@ -19,7 +19,7 @@ Alarm signals that system armed and should alarm
 */
 var Alarm alarm
 
-func (q alarm) init() {
+func init() {
 	var err error
 	Alarm.Armed, err = Exists(armedFile)
 	if err != nil {

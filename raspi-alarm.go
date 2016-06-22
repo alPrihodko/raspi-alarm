@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
-	"raspi-alarm/alarm"
 	"sync"
 	"syscall"
 
@@ -82,18 +81,6 @@ func main() {
 	initMoveDetect(gbot, ra)
 	initButton(gbot, ra)
 	Led = initLed(gbot, ra)
-
-	if alarm.Alarm.Armed == false {
-		err = alarm.Alarm.Disarm()
-		if err != nil {
-			log.Println("Cannot disarm system")
-		}
-	} else {
-		err = alarm.Alarm.Arm()
-		if err != nil {
-			log.Println("Cannot arm system")
-		}
-	}
 
 	setLed()
 
