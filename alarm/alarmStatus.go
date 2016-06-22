@@ -25,17 +25,26 @@ func init() {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	log.Println("System state ", Alarm.Armed)
+	log.Println("Alarm system state ", Alarm.Armed)
 }
 
 /*
 Exists returns file exists
 */
 func Exists(name string) (bool, error) {
-	_, err := os.Stat(name)
+	v, err := os.Stat(name)
+
+	log.Println(v)
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
 	if os.IsNotExist(err) {
+		log.Println("seems nofile: ", name)
 		return false, nil
 	}
+
 	return err != nil, err
 }
 
