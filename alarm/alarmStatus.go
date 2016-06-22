@@ -89,6 +89,31 @@ func ExeCmd(cmd string, wg *sync.WaitGroup) {
 }
 
 /*
+ExeCmdNoWait execs shell script
+*/
+func ExeCmdNoWait(cmd string) {
+	log.Println(cmd)
+	parts := strings.Fields(cmd)
+	var out []byte
+	var err error
+	if len(parts) > 2 {
+		out, err = exec.Command(parts[0], parts[1], parts[2]).Output()
+	} else if len(parts) == 2 {
+		out, err = exec.Command(parts[0], parts[1]).Output()
+	} else if len(parts) == 1 {
+		out, err = exec.Command(parts[0]).Output()
+	} else {
+		log.Println("Invalid arguments")
+	}
+	if err != nil {
+		log.Println("error occured")
+		log.Println(err.Error())
+		log.Println(string(out))
+	}
+	log.Println(string(out))
+}
+
+/*
 Exists returns file exists
 */
 func Exists(name string) (bool, error) {

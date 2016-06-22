@@ -20,6 +20,7 @@ func initMoveDetect(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 			log.Println("detected")
 			if alarm.Alarm.Armed {
 				ReportAlert("Move detected", "Sendor 1 detected move.")
+				go alarm.ExeCmdNoWait("/home/pi/w/go/src/raspi-alarm/alarm.sh")
 			}
 		})
 
