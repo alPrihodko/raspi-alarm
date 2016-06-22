@@ -29,26 +29,6 @@ func init() {
 }
 
 /*
-Exists returns file exists
-*/
-func Exists(name string) (bool, error) {
-	v, err := os.Stat(name)
-
-	log.Println(v)
-
-	if err != nil {
-		log.Println(err.Error())
-	}
-
-	if os.IsNotExist(err) {
-		log.Println("seems nofile: ", name)
-		return false, nil
-	}
-
-	return err != nil, err
-}
-
-/*
 Arm arms system
 */
 func (q alarm) Arm() error {

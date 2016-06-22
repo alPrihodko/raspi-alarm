@@ -1,6 +1,9 @@
 package main
 
 import (
+	"log"
+	"os"
+
 	"gopkg.in/gomail.v2"
 )
 
@@ -27,4 +30,24 @@ func ReportAlert(s string, b string, files ...string) error {
 	}
 
 	return nil
+}
+
+/*
+Exists returns file exists
+*/
+func Exists(name string) (bool, error) {
+	_, err := os.Stat(name)
+
+	//log.Println(v)
+
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	if os.IsNotExist(err) {
+		log.Println("seems no file: ", name)
+		return false, nil
+	}
+
+	return err == nil, err
 }
