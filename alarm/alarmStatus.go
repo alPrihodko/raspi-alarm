@@ -51,7 +51,7 @@ func (q alarm) Arm() error {
 
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	exeCmd("/home/pi/w/go/src/raspi-alarm/arm.sh", wg)
+	ExeCmd("/home/pi/w/go/src/raspi-alarm/arm.sh", wg)
 	wg.Wait()
 	Alarm.Armed = true
 	return nil
@@ -68,12 +68,15 @@ func (q alarm) Disarm() error {
 	Alarm.Armed = false
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	exeCmd("/home/pi/w/go/src/raspi-alarm/disarm.sh", wg)
+	ExeCmd("/home/pi/w/go/src/raspi-alarm/disarm.sh", wg)
 	wg.Wait()
 	return nil
 }
 
-func exeCmd(cmd string, wg *sync.WaitGroup) {
+/*
+ExeCmd execs shell script
+*/
+func ExeCmd(cmd string, wg *sync.WaitGroup) {
 	log.Println(cmd)
 	parts := strings.Fields(cmd)
 	var out []byte
