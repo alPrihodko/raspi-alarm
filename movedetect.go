@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"raspi-alarm/alarm"
+	"time"
 	//"os"
 	//"time"
 	//  "sync"
@@ -19,7 +20,9 @@ func initMoveDetect(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 		gobot.On(button.Event("push"), func(data interface{}) {
 			log.Println("detected")
 			if alarm.Alarm.Armed {
-				ReportAlert("Move detected", "Sendor 1 detected move.")
+				if (alarm.Alarm.ArmedAt - int32(time.Now().Unix())) > 120 {
+					ReportAlert("Move detected", "Sendor 1 detected move.")
+				}
 				go alarm.ExeCmdNoWait("/home/pi/w/go/src/raspi-alarm/alarm.sh")
 			}
 		})

@@ -6,12 +6,14 @@ import (
 	"os/exec"
 	"strings"
 	"sync"
+	"time"
 )
 
 const armedFile = "/var/lock/raspi-alarm-armed.lock"
 
 type alarm struct {
-	Armed bool
+	Armed   bool
+	ArmedAt int32
 }
 
 /*
@@ -43,6 +45,7 @@ func (q alarm) Arm() error {
 	ExeCmd("/home/pi/w/go/src/raspi-alarm/arm.sh", wg)
 	wg.Wait()
 	Alarm.Armed = true
+	Alarm.ArmedAt = int32(time.Now().Unix())
 	return nil
 }
 
