@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-const armedFile = "/var/lock/raspi-alarm-armed.lock"
+const armedFile = "/etc/raspi-alarm-armed.lock"
 
 type alarm struct {
 	Armed   bool
