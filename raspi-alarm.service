@@ -1,0 +1,18 @@
+[Unit]
+Description=raspi-alarm
+After=systemd-user-sessions.service plymouth-quit-wait.service network.target
+After=rc-local.service
+
+
+[Service]
+Type=simple
+EnvironmentFile=
+ExecStart=/home/pi/w/go/src/raspi-alarm/raspi-alarm 
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=control-group
+RestartSec=10
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=raspi-alarm.service
