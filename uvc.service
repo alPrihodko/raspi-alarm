@@ -1,0 +1,16 @@
+[Unit]
+Description=UVC camera logging
+After=network.target auditd.service sshd.service
+
+[Service]
+ExecStart=/usr/local/bin/writeStream.sh
+KillMode=control-group
+Restart=on-failure
+ExecReload=/bin/kill -HUP $MAINPID
+
+
+[Install]
+WantedBy=multi-user.target
+Alias=uvc.service
+
+
