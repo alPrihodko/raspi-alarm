@@ -3,6 +3,9 @@ Description=UVC camera logging
 After=network.target auditd.service sshd.service
 
 [Service]
+Type=simple
+User=al
+Group=al
 ExecStart=/usr/local/bin/writeStream.sh
 KillMode=control-group
 Restart=on-failure
