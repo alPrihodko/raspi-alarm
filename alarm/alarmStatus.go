@@ -10,6 +10,7 @@ import (
 )
 
 const armedFile = "/etc/raspi-alarm-armed.lock"
+const binpath = "/usr/local/bin/"
 
 type alarm struct {
 	Armed   bool
@@ -42,7 +43,7 @@ func (q alarm) Arm() error {
 
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	ExeCmd("/home/pi/w/go/src/raspi-alarm/arm.sh", wg)
+	ExeCmd("arm.sh", wg)
 	wg.Wait()
 	Alarm.Armed = true
 	Alarm.ArmedAt = int32(time.Now().Unix())
@@ -60,7 +61,7 @@ func (q alarm) Disarm() error {
 	Alarm.Armed = false
 	wg := new(sync.WaitGroup)
 	wg.Add(1)
-	ExeCmd("/home/pi/w/go/src/raspi-alarm/disarm.sh", wg)
+	ExeCmd("disarm.sh", wg)
 	wg.Wait()
 	return nil
 }
@@ -74,11 +75,11 @@ func ExeCmd(cmd string, wg *sync.WaitGroup) {
 	var out []byte
 	var err error
 	if len(parts) > 2 {
-		out, err = exec.Command(parts[0], parts[1], parts[2]).Output()
+		out, err = exec.Command(binpath+parts[0], parts[1], parts[2]).Output()
 	} else if len(parts) == 2 {
-		out, err = exec.Command(parts[0], parts[1]).Output()
+		out, err = exec.Command(binpath+parts[0], parts[1]).Output()
 	} else if len(parts) == 1 {
-		out, err = exec.Command(parts[0]).Output()
+		out, err = exec.Command(binpath + parts[0]).Output()
 	} else {
 		log.Println("Invalid arguments")
 	}
@@ -100,11 +101,11 @@ func ExeCmdNoWait(cmd string) {
 	var out []byte
 	var err error
 	if len(parts) > 2 {
-		out, err = exec.Command(parts[0], parts[1], parts[2]).Output()
+		out, err = exec.Command(binpath+parts[0], parts[1], parts[2]).Output()
 	} else if len(parts) == 2 {
-		out, err = exec.Command(parts[0], parts[1]).Output()
+		out, err = exec.Command(binpath+parts[0], parts[1]).Output()
 	} else if len(parts) == 1 {
-		out, err = exec.Command(parts[0]).Output()
+		out, err = exec.Command(binpath + parts[0]).Output()
 	} else {
 		log.Println("Invalid arguments")
 	}

@@ -7,7 +7,7 @@ XML='<?xml version="1.0" encoding="UTF-8"?>
         <password>fktrc-fk</password>
     </auth>
     <message>
-          <from>Alarm System</from>
+          <from>Test</from>
           <text>Move detected</text>
           <recipient>380939760324</recipient>
     </message>

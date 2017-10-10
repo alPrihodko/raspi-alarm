@@ -1,0 +1,21 @@
+[Unit]
+Description=vlc
+After=rc-local.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+EnvironmentFile=
+ExecStart=/usr/local/bin/vlc_stream.sh
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+KillSignal=SIGTERM
+SendSIGHUP=yes
+TimeoutStopSec=5
+RestartSec=2
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=vlc.service

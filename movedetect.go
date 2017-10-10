@@ -25,7 +25,7 @@ func initMoveDetect(gbot *gobot.Gobot, r *raspi.RaspiAdaptor) {
 				if diff > 120 {
 					ReportAlert("Move detected", "Sendor 1 detected move.")
 				}
-				go alarm.ExeCmdNoWait("/home/pi/w/go/src/raspi-alarm/alarm.sh")
+				go alarm.ExeCmdNoWait("alarm.sh")
 			}
 		})
 
