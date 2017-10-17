@@ -11,7 +11,7 @@ export GOOS=linux
 export GOARCH=arm
 export GOARM=7
 
-if [ "$1" -eq "all" ]; then
+if [ "$1" == "all" ]; then
     go build || exit 1
     ssh pi\@$HOST "sudo service raspi-alarm stop" || exit 1
     scp raspi-alarm $deploy || exit 1

@@ -7,7 +7,11 @@ Type=simple
 User=al
 Group=al
 ExecStart=/usr/local/bin/writeStream.sh
-KillMode=control-group
+ExecReload=/bin/kill -HUP $MAINPID
+KillMode=mixed
+KillSignal=SIGTERM
+SendSIGHUP=yes
+TimeoutStopSec=5
 Restart=on-failure
 ExecReload=/bin/kill -HUP $MAINPID
 
